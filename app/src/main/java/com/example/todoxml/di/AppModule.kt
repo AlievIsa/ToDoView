@@ -1,12 +1,14 @@
 package com.example.todoxml.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.example.todoxml.data.TaskDatabase
 import dagger.hilt.components.SingletonComponent
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import javax.inject.Qualifier
@@ -18,9 +20,9 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(
-        app: Application,
+        @ApplicationContext context: Context,
         callback: TaskDatabase.Callback
-    ) = Room.databaseBuilder(app, TaskDatabase::class.java, "task_database")
+    ) = Room.databaseBuilder(context, TaskDatabase::class.java, "task_database")
         .fallbackToDestructiveMigration()
         .addCallback(callback)
         .build()

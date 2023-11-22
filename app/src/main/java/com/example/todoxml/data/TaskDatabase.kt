@@ -22,7 +22,7 @@ abstract class TaskDatabase: RoomDatabase() {
 
             val dao = database.get().taskDao()
             applicationScope.launch {
-                dao.insert(Task("Wash yhe dishes"))
+                dao.insert(Task("Wash the dishes", completed = true))
             }
         }
     }

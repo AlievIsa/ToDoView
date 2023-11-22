@@ -60,7 +60,7 @@ dependencies {
     //implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
 
     // Fragment
-    implementation("androidx.fragment:fragment-ktx:1.6.1")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     // Lifecycle + ViewModel & LiveData
     //implementation("androidx.lifecycle:lifecycle-view-model-ktx:2.6.2")
@@ -68,13 +68,14 @@ dependencies {
     implementation("android.arch.lifecycle:common-java8:1.1.1")
 
     // Navigation Component
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
     // Room
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
-    // annotationProcessor("androidx.room:room-compiler:2.6.0")
+    //kapt("android.arch.persistence.room:compiler:1.1.1")
+    kapt("androidx.room:room-compiler:2.6.0")
 
     // Coroutines
     //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:")
