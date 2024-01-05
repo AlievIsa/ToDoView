@@ -87,7 +87,7 @@ dependencies {
     //kapt("androidx.hilt:hilt-compiler:1.0.0")
 
     // DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences:1.0.0-alpha08")
 
 }
 
