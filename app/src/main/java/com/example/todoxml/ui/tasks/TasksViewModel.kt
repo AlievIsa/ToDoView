@@ -6,6 +6,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.todoxml.data.PreferencesManager
+import com.example.todoxml.data.SortOrder
 import com.example.todoxml.data.Task
 import com.example.todoxml.data.TaskDao
 import com.example.todoxml.ui.ADD_TASK_RESULT_OK
@@ -96,8 +97,4 @@ class TasksViewModel @Inject constructor(
         data class ShowTaskSavedConfirmationMessage(val msg: String) : TasksEvent()
         data object NavigateToDeleteAllCompletedScreen : TasksEvent()
     }
-}
-
-enum class SortOrder{
-    BY_NAME, BY_DATE
 }

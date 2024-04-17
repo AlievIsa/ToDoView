@@ -6,6 +6,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todoxml.R
+import com.example.todoxml.data.SortOrder
 import com.example.todoxml.data.Task
 import com.example.todoxml.databinding.FragmentTasksBinding
 import com.example.todoxml.util.exhaustive
@@ -32,6 +34,7 @@ import kotlinx.coroutines.launch
 class TasksFragment: Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClickListener {
 
     private val viewModel: TasksViewModel by viewModels()
+    private lateinit var searchView: SearchView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -107,8 +110,6 @@ class TasksFragment: Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClick
             }
         }
 
-
-        requireActivity().invalidateOptionsMenu()
         val menuHost: MenuHost = requireActivity()
         menuHost.addMenuProvider(object: MenuProvider {
 
@@ -116,7 +117,13 @@ class TasksFragment: Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClick
                 menuInflater.inflate(R.menu.menu_fragment_tasks, menu)
 
                 val searchItem = menu.findItem(R.id.action_search)
-                val searchView = searchItem.actionView as SearchView
+                searchView = searchItem.actionView as SearchView
+
+                val pendingQuery = viewModel.searchQuery.value
+                if (!pendingQuery.isNullOrEmpty()) {
+                    searchItem.expandActionView()
+                    searchView.setQuery(pendingQuery, false)
+                }
 
                 searchView.onQueryTextChanged {
                     viewModel.searchQuery.value = it
@@ -159,5 +166,13 @@ class TasksFragment: Fragment(R.layout.fragment_tasks), TasksAdapter.OnItemClick
 
     override fun onCheckBoxClick(task: Task, isChecked: Boolean) {
         viewModel.onTaskCheckedChanged(task, isChecked)
+    }
+
+    override fun onStop() {
+        searchView.setOnQueryTextListener(null)
+        super.onStop()
+    }
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }

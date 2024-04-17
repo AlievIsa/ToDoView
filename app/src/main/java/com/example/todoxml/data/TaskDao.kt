@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import androidx.room.Upsert
-import com.example.todoxml.ui.tasks.SortOrder
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -36,6 +35,7 @@ interface TaskDao {
 
     @Delete
     suspend fun delete(task: Task)
+
     @Query("DELETE FROM task_table WHERE completed = 1")
     suspend fun deleteCompletedTasks()
 }
