@@ -14,7 +14,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.todoxml.R
 import com.example.todoxml.databinding.FragmentAddEditTaskBinding
-import com.example.todoxml.util.exhaustive
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -64,7 +63,7 @@ class AddEditTaskFragment : Fragment(R.layout.fragment_add_edit_task) {
                             )
                             findNavController().popBackStack()
                         }
-                    }.exhaustive
+                    }
                 }
             }
         }
